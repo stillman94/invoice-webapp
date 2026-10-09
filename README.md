@@ -14,29 +14,31 @@ A self-service web tool: upload a PDF invoice, review the extracted data, and sa
 
 ```
 invoice-upload-webapp/
-├── backend/
-│   ├── app.py              # Flask server (/api/process, /api/save)
-│   ├── pdf_processor.py    # PDF extraction (reused from Lesson 2.2)
-│   ├── validation.py       # Math/price/vendor checks (reused from Lesson 2.2)
-│   ├── airtable_client.py  # Airtable read/write, dedupe by Invoice Number + Vendor
+├── api/
+│   ├── index.py             # Flask server (/api/process, /api/save) - Vercel auto-detects this as a serverless function
+│   ├── pdf_processor.py     # PDF extraction (reused from Lesson 2.2)
+│   ├── validation.py        # Math/price/vendor checks (reused from Lesson 2.2)
+│   ├── airtable_client.py   # Airtable read/write, dedupe by Invoice Number + Vendor
 │   ├── vendor-list.csv
-│   ├── item-price-list.csv
-│   └── requirements.txt
-└── frontend/
-    ├── index.html
-    ├── style.css
-    └── script.js
+│   └── item-price-list.csv
+├── public/                  # Vercel auto-serves these as static files
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+└── requirements.txt
 ```
+
+This layout (not `backend/`/`frontend/`) is required by Vercel's zero-config Python support - a Flask app at `api/index.py` is automatically deployed as a serverless function, and anything in `public/` is automatically served as static files. No `vercel.json` needed.
 
 ## Running it locally
 
 ```powershell
-cd backend
-pip install -r requirements.txt
-python app.py
+cd api
+pip install -r ../requirements.txt
+python index.py
 ```
 
-Server starts at `http://localhost:5000`. Then open `frontend/index.html` directly in a browser.
+Server starts at `http://localhost:5000`. Then open `public/index.html` directly in a browser.
 
 ## Environment variables
 
@@ -52,4 +54,4 @@ No separate `.env` file needed inside this folder.
 
 - Defaults to the **test** Airtable base for safety. Set `PIPELINE_ENV=production` as an environment variable before running to target the real base.
 - Max upload size: 5MB. Only `.pdf` files are accepted.
-- Logs to `backend/logs/webapp_YYYY-MM-DD.log`.
+- Logs to the system temp directory (`invoice_webapp_logs/webapp_YYYY-MM-DD.log`) - required since Vercel's serverless functions can't write to their own project folder.

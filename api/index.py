@@ -19,9 +19,13 @@ app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE_BYTES
 VENDOR_FILE = os.path.join(os.path.dirname(__file__), 'vendor-list.csv')
 PRICE_FILE = os.path.join(os.path.dirname(__file__), 'item-price-list.csv')
 
-os.makedirs("logs", exist_ok=True)
+
+# Serverless functions (Vercel) can't write to their own project folder -
+# only to the system temp directory, which is also writable in local dev.
+LOG_DIR = os.path.join(tempfile.gettempdir(), "invoice_webapp_logs")
+os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
-    filename=f"logs/webapp_{date.today().isoformat()}.log",
+    filename=os.path.join(LOG_DIR, f"webapp_{date.today().isoformat()}.log"),
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
 )

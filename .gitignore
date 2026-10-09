@@ -2,7 +2,7 @@
 .env.local
 __pycache__/
 *.pyc
-backend/logs/
-backend/*.log
+*.log
+.vercel
 node_modules/
 .DS_Store
