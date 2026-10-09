@@ -1,4 +1,7 @@
-const API_BASE = "http://localhost:5000";
+// Local testing (double-clicking index.html) uses file:// - point it at the
+// local Flask server. Once deployed, frontend and backend share the same
+// Vercel domain, so a relative path (same origin) is correct there.
+const API_BASE = window.location.protocol === "file:" ? "http://localhost:5000" : "";
 
 const fileInput = document.getElementById("file-input");
 const processBtn = document.getElementById("process-btn");
