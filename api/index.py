@@ -4,6 +4,7 @@ import tempfile
 import logging
 from datetime import date
 
+import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -105,6 +106,9 @@ def save_invoice():
     except AirtableAuthError as e:
         logger.critical(f"Airtable auth failure: {e}")
         return jsonify({"error": "Airtable rejected our credentials - contact the automation owner"}), 502
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Airtable request failed: {e}")
+        return jsonify({"error": f"Could not reach Airtable: {e}"}), 502
 
     if not success:
         logger.error(f"{invoice.get('invoice_number')}: Airtable write failed")

@@ -78,8 +78,8 @@ def create_airtable_record(data):
     transient (5xx/network) failures. Returns (success, record_id)."""
     try:
         existing_id = find_existing_record(data["Invoice Number"], data.get("Vendor Name"))
-    except requests.exceptions.RequestException as e:
-        return False, None
+    except requests.exceptions.RequestException:
+        raise
 
     if existing_id:
         url = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_NAME}/{existing_id}"
