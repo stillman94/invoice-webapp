@@ -1,0 +1,9 @@
+vendor_id,vendor_name,contact_email,payment_terms,category,active
+V001,Acme Corp,billing@acmecorp.com,Net 30,Raw Materials,TRUE
+V002,Widget Supplies Inc,accounts@widgetsupplies.com,Net 30,Components,TRUE
+V003,Tech Parts Direct,invoices@techpartsdirect.com,Net 15,Electronics,TRUE
+V004,Global Shipping Solutions,payments@globalship.com,Due on Receipt,Logistics,TRUE
+V005,Office Depot Business,business@officedepot.com,Net 30,Office Supplies,TRUE
+V006,Industrial Tools LLC,billing@indtools.com,Net 45,Equipment,TRUE
+V007,Quality Metals Inc,ar@qualitymetals.com,Net 30,Raw Materials,FALSE
+V008,Precision Bearings Co,invoices@precisionbearings.com,Net 30,Components,TRUE

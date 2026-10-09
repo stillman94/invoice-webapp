@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice Upload Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Invoice Upload Tool</h1>
+    <p class="subtitle">Upload a PDF invoice, review the extracted data, then save it to Airtable.</p>
+
+    <div id="upload-section" class="card">
+      <input type="file" id="file-input" accept="application/pdf">
+      <button id="process-btn">Process Invoice</button>
+      <p id="status-message"></p>
+    </div>
+
+    <div id="results-section" class="card" hidden>
+      <h2>Review Extracted Data</h2>
+      <div id="warnings" class="warnings" hidden></div>
+
+      <label>Invoice Number
+        <input type="text" id="field-invoice_number">
+      </label>
+      <label>Vendor Name
+        <input type="text" id="field-vendor_name">
+      </label>
+      <label>Invoice Date
+        <input type="text" id="field-invoice_date">
+      </label>
+      <label>Due Date
+        <input type="text" id="field-due_date">
+      </label>
+      <label>Total Amount
+        <input type="text" id="field-total_amount">
+      </label>
+
+      <button id="save-btn">Save to Airtable</button>
+      <p id="save-message"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
