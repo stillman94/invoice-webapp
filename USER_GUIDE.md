@@ -6,7 +6,7 @@ Upload an invoice PDF, see the data it pulled out (invoice number, vendor, dates
 
 ## How to Use
 
-1. Open: **[URL will be added after deployment - Lesson 2.5]**
+1. Open: **https://invoice-webapp-phi.vercel.app**
 2. Click "Choose File" and select your invoice PDF
 3. Click "Process Invoice"
 4. Review the extracted fields below - if anything's wrong (a misread date, a typo'd vendor name), just click into the field and fix it
