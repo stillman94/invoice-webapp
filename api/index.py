@@ -1,10 +1,17 @@
 import os
+import sys
 import tempfile
 import logging
 from datetime import date
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
+# Vercel loads this file via importlib rather than running it as a script,
+# which (unlike local `python index.py`) does NOT add this file's own folder
+# to sys.path - without this, the sibling-module imports below fail with
+# "ModuleNotFoundError" in production even though the files are right there.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from pdf_processor import extract_raw_pdf_data, extract_invoice_fields
 from validation import run_all_validations
